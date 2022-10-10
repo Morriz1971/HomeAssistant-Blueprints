@@ -1,0 +1,74 @@
+blueprint:
+  name: Luce accesa a seguito di un movimento
+  description: Accende una luce a seguito di un rilevamento di movimento.
+  domain: automation
+  input:
+    motion_entity:
+      name: Sensore di movimento
+      descritption: Sensore di rilevamento di presenza che accende la luce
+      selector:
+        entity:
+          domain: binary_sensor
+          device_class: motion
+    lux_entity:
+      name: Sensore di luminosità
+      descritption: Sensore di rilevamento di luminosità in Lux
+      selector:
+        entity:
+          domain: sensor
+          device_class: illuminance
+    lux_level:
+      name: Lumionosità di soglia
+      description: Luminosità al di sotto della quale accendere la luce
+      default: 100
+      selector:
+        number:
+          min: 0
+          max: 1000
+    light_target:
+      name: Luce
+      descritption: Luce da accendere o spegnere
+      selector:
+        target:
+          entity:
+            domain: light
+    no_motion_wait:
+      name: Secondi di accensione della luce
+      description: Numero di secondi in cui lasciare la luce accesa a seguito dell'ultima rilevazione di movimento.
+      default: 120
+      selector:
+        number:
+          min: 0
+          max: 3600
+          unit_of_measurement: seconds
+
+# Se viene rilevato un movimento durante il tempo impostato per mantenere la luce accesa, viene riavviato lo script.
+mode: restart
+max_exceeded: silent
+
+trigger:
+  platform: state
+  entity_id: !input motion_entity
+  from: "off"
+  to: "on"
+
+condition:
+  condition: numeric_state
+  entity_id: !input lux_entity
+  below: !input lux_level
+
+action:
+  - alias: "Accende la luce"
+    service: light.turn_on
+    target: !input light_target
+  - alias: "Aspetta fino a quando non sia rilevato nessun movimento"
+    wait_for_trigger:
+      platform: state
+      entity_id: !input motion_entity
+      from: "on"
+      to: "off"
+  - alias: "Aspetta il numero di secondi che è stato impostato"
+    delay: !input no_motion_wait
+  - alias: "Spegne la luce"
+    service: light.turn_off
+    target: !input light_target
