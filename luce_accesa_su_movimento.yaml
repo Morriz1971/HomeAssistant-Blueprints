@@ -18,7 +18,7 @@ blueprint:
           device_class: illuminance
     lux_level:
       name: Lumionosità di soglia
-      description: Luminosità al di sotto della quale accendere la luce
+      description: Luminosità al di sotto della quale accendere la luce (Lux - lx)
       default: 100
       selector:
         number:
