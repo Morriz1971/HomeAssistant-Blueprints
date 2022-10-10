@@ -1,6 +1,6 @@
 blueprint:
-  name: Luce accesa a seguito di un movimento
-  description: Accende una luce a seguito di un rilevamento di movimento.
+  name: Luce accesa a seguito di un movimento e soglia di luminosità
+  description: Accende una luce a seguito di un rilevamento di movimento e se la luminosità è sotto una certa soglia
   domain: automation
   source_url: https://github.com/Morriz1971/HomeAssistant-Blueprints/blob/main/luce_accesa_su_movimento.yaml
   input:
@@ -24,6 +24,7 @@ blueprint:
         number:
           min: 0
           max: 1000
+          unit_of_measurement: lux
     light_target:
       name: Luce
       selector:
