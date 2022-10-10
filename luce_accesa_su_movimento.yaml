@@ -5,14 +5,12 @@ blueprint:
   input:
     motion_entity:
       name: Sensore di movimento
-      descritption: Sensore di rilevamento di presenza che accende la luce
       selector:
         entity:
           domain: binary_sensor
           device_class: motion
     lux_entity:
       name: Sensore di luminosità
-      descritption: Sensore di rilevamento di luminosità in Lux
       selector:
         entity:
           domain: sensor
@@ -27,7 +25,6 @@ blueprint:
           max: 1000
     light_target:
       name: Luce
-      descritption: Luce da accendere o spegnere
       selector:
         target:
           entity:
