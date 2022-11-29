@@ -30,7 +30,8 @@ blueprint:
       selector:
         target:
           entity:
-            domain: light, switch
+            domain: light
+            domain: switch
     no_motion_wait:
       name: Secondi di accensione della luce
       description: Numero di secondi in cui lasciare la luce accesa a seguito dell'ultima rilevazione di movimento.
