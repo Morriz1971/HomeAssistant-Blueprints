@@ -2,7 +2,7 @@ blueprint:
   name: Controllo del livello della batterie dei sensori
   description: Controlla regolarmente tutti i sensori che hanno device-class 'battery' se ha superato la soglia indicata e in tal caso esegue un'azione.
   domain: automation
-  source_url: https://github.com/gmlupatelli/blueprints_repo/blob/master/low_battery_notification/low_battery_notification.yaml
+  source_url: https://github.com/Morriz1971/HomeAssistant-Blueprints/blob/main/batterie_scarische_sensori.yaml
 
 
   # Blueprint Inputs
@@ -27,43 +27,43 @@ blueprint:
         time: {}
     # Qui l'utente sceglie in quali giorni della settimana deve essere eseguito il test.
     monday_enabled:
-      name: 'Monday'
+      name: 'Lunedì'
       description: 'Esegue il test lunedì'
       default: True
       selector:
         boolean:
     tuesday_enabled:
-      name: Tuesday
+      name: Martedì
       description: 'Esegue il test martedì'
       default: True
       selector:
         boolean:
     wednesday_enabled:
-      name: Wednesday
+      name: Mercoledì
       description: 'Esegue il test mercoledì'
       default: True
       selector:
         boolean:
     thursday_enabled:
-      name: Thursday
+      name: Giovedì
       description: 'Esegue il test giovedì'
       default: True
       selector:
         boolean:
     friday_enabled:
-      name: Friday
+      name: Venerdì
       description: 'Esegue il test venerdì'
       default: True
       selector:
         boolean:
     saturday_enabled:
-      name: Saturday
+      name: Sabato
       description: 'Esegue il test sabato'
       default: True
       selector:
         boolean:
     sunday_enabled:
-      name: Sunday
+      name: Domenica
       description: 'Esegue il test domenica'
       default: True
       selector:
@@ -131,7 +131,7 @@ trigger:
     at: !input 'time'
 
 
-# Conditions used to determine if the automation should run for the specific trigger event
+# Condizioni usate per determinare se l'automazione deve essere eseguita per specifici eventi trigger
 condition:
 # Check if the automation is supposed to be executed during that specific weekday
   - condition: template
