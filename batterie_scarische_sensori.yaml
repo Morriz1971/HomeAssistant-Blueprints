@@ -1,5 +1,5 @@
 blueprint:
-  name: Controllo del livello della batterie dei sensori
+  name: Controllo del livello delle batterie dei sensori
   description: Controlla regolarmente tutti i sensori che hanno device-class 'battery' se ha superato la soglia indicata e in tal caso esegue un'azione.
   domain: automation
   source_url: https://github.com/Morriz1971/HomeAssistant-Blueprints/blob/main/batterie_scarische_sensori.yaml
@@ -133,7 +133,7 @@ trigger:
 
 # Condizioni usate per determinare se l'automazione deve essere eseguita per specifici eventi trigger
 condition:
-# Check if the automation is supposed to be executed during that specific weekday
+# Controllo se l'automazione può essere esguita in uno specifico giorno
   - condition: template
     value_template: >-
         {{ 
@@ -147,13 +147,13 @@ condition:
         }}
 
 
-  # Check if the sensors list is not empty
+  # Controllo se la lista dei sensori non è vuota
   - condition: template
     value_template: >-
         {{ sensors != "⤵ \n-"}}
 
 
-# Actions
+# Azioni
 action:
   - choose: []
     default: !input 'actions'
