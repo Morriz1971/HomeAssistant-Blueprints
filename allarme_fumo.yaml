@@ -7,26 +7,22 @@ blueprint:
   source_url: https://github.com/Morriz1971/HomeAssistant-Blueprints/blob/main/allarme_fumo.yaml
   input:
     title:
-        name: Titolo
-        description: Titolo della notifica da inviare, per es. Allarme fumo
-        default: 'HA PIEVE - Allarme fumo'
-        selector:
-            text:
-
+      name: Titolo
+      description: Titolo della notifica da inviare, per es. Allarme fumo
+      default: 'HA PIEVE - Allarme fumo'
+      selector:
+        text:
     text:
-        name: Messaggio
-        description: Testo del messaggio da inviare, per es. ATTENZIONE! È stato rilevato del fumo
-        default: ATTENZIONE! È stato rilevato del **fumo**
-        selector:
-            text:
-
+      name: Messaggio
+      description: Testo del messaggio da inviare, per es. ATTENZIONE! È stato rilevato del fumo
+      default: ATTENZIONE! È stato rilevato del **fumo**
+      selector:
+        text:
 trigger:
   platform: template
   value_template: "{{ states.binary_sensor | selectattr('attributes.device_class', 'eq', 'smoke') | map(attribute='state') | list | join(',') == 'on' }}"
-
 variables:
     text_var: !input text
-    
 action:
   - service: telegram_bot.send_message
     data:
