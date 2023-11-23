@@ -1,7 +1,10 @@
 blueprint:
   name: Allarme per fumo
-  description: 'Vengono inviate una notifica push su Telegram e una notifica persistente ad Home Assistant non appena uno dei sensori individua del fumo.'
+  description: Vengono inviate una notifica push su Telegram e una notifica persistente ad Home Assistant non appena uno dei sensori individua del fumo.
   domain: automation
+    homeassistant:
+    min_version: 2021.11.0
+  source_url: https://github.com/Morriz1971/HomeAssistant-Blueprints/blob/main/allarme_fumo.yaml
   input:
     title:
         name: Titolo
@@ -12,8 +15,8 @@ blueprint:
 
     text:
         name: Messaggio
-        description: 'Testo del messaggio. Questo messaggio viene aggiunto al nome del sensore [sensor name] [text message].'
-        default: 'ATTENZIONE! È stato rilevato del **fumo nella tavernetta**.'
+        description: Testo del messaggio. Questo messaggio viene aggiunto al nome del sensore [sensor name] [text message].
+        default: ATTENZIONE! È stato rilevato del **fumo nella tavernetta**.
         selector:
             text:
 
@@ -25,14 +28,11 @@ variables:
     text_var: !input text
     
 action:
-action:
   - service: telegram_bot.send_message
     data:
       title: !input title
       parse_mode: markdown
-      message: >-
-      
-        "{{state_attr(trigger.entity_id, 'friendly_name')}} {{text_var}}"
+      message: "{{state_attr(trigger.entity_id, 'friendly_name')}} {{text_var}}"
   - service: notify.persistent_notification
     data:
         title: !input title
