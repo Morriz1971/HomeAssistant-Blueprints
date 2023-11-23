@@ -2,8 +2,8 @@ blueprint:
   name: Allarme per fumo
   description: Vengono inviate una notifica push su Telegram e una notifica persistente ad Home Assistant non appena uno dei sensori individua del fumo.
   domain: automation
-    homeassistant:
-    min_version: 2021.11.0
+  homeassistant:
+    min_version: 2023.11.0
   source_url: https://github.com/Morriz1971/HomeAssistant-Blueprints/blob/main/allarme_fumo.yaml
   input:
     title:
