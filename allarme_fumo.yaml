@@ -1,0 +1,36 @@
+blueprint:
+  name: Allarme per fumo
+  description: 'Push notification (mobile App) + persistent notification will be sent as soon as one of the sensors detects smoke.'
+  domain: automation
+  input:
+    title:
+        name: Titolo
+        description: Titolo della notifica per es. ALLARME FUOCO
+        default: ' !! ALLARME FUMO!!'
+        selector:
+            text:
+
+    text:
+        name: Messaggio
+        description: 'Testo del messaggio. This message will be added to the name of the sensor [sensor name] [text message].'
+        default: ' fumo !'
+        selector:
+            text:
+
+trigger:
+  platform: template
+  value_template: "{{ states.binary_sensor | selectattr('attributes.device_class', 'eq', 'smoke') | map(attribute='state') | list | join(',') == 'on' }}"
+
+variables:
+    text_var: !input text
+    
+action:
+  - service: notify.notify
+    data:
+        title: !input title
+        message: "{{state_attr(trigger.entity_id, 'friendly_name')}} {{text_var}}"
+  - service: notify.persistent_notification
+    data:
+        title: !input title
+        message: "{{state_attr(trigger.entity_id, 'friendly_name')}} {{text_var}}"
+mode: single
