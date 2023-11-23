@@ -28,10 +28,14 @@ action:
     data:
       title: !input title
       parse_mode: markdown
-      message: {{ text_var }} ({{ state_attr(trigger.entity_id, 'friendly_name') }} ) alle {{ states('sensor.time') }} di {{ states('sensor.time_formatted') }}.
+      message: >-
+      
+        {{ text_var }} ({{ state_attr(trigger.entity_id, 'friendly_name') }} ) alle {{ states('sensor.time') }} di {{ states('sensor.time_formatted') }}.
   - service: notify.persistent_notification
     data:
       title: !input title
       parse_mode: markdown
-      message: {{ text_var }} ({{ state_attr(trigger.entity_id, 'friendly_name') }}) alle {{ states('sensor.time') }} di {{ states('sensor.time_formatted') }}.
+      message: >-
+      
+        {{ text_var }} ({{ state_attr(trigger.entity_id, 'friendly_name') }}) alle {{ states('sensor.time') }} di {{ states('sensor.time_formatted') }}.
 mode: single
