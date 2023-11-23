@@ -3,20 +3,20 @@ blueprint:
   description: Vengono inviate una notifica push su Telegram e una notifica persistente ad Home Assistant non appena uno dei sensori individua del fumo.
   domain: automation
   homeassistant:
-    min_version: 2022.11.0
+    min_version: 2023.10.0
   source_url: https://github.com/Morriz1971/HomeAssistant-Blueprints/blob/main/allarme_fumo.yaml
   input:
     title:
         name: Titolo
-        description: Titolo della notifica da inviare per es. Allarme fuoco
+        description: Titolo della notifica da inviare, per es. Allarme fumo
         default: 'HA PIEVE - Allarme fumo'
         selector:
             text:
 
     text:
         name: Messaggio
-        description: Testo del messaggio. Questo messaggio viene aggiunto al nome del sensore [sensor name] [text message].
-        default: ATTENZIONE! È stato rilevato del **fumo nella tavernetta** alle {{ states('sensor.time') }} di {{ states('sensor.time_formatted') }}.
+        description: Testo del messaggio da inviare, per es. ATTENZIONE! È stato rilevato del fumo
+        default: ATTENZIONE! È stato rilevato del **fumo**
         selector:
             text:
 
@@ -32,10 +32,10 @@ action:
     data:
       title: !input title
       parse_mode: markdown
-      message: "{{ state_attr(trigger.entity_id, 'friendly_name') }} {{ text_var }}"
+      message: {{ text_var }} ({{ state_attr(trigger.entity_id, 'friendly_name') }} ) alle {{ states('sensor.time') }} di {{ states('sensor.time_formatted') }}.
   - service: notify.persistent_notification
     data:
-        title: !input title
-        parse_mode: markdown
-        message: "{{ state_attr(trigger.entity_id, 'friendly_name') }} {{ text_var }}"
+      title: !input title
+      parse_mode: markdown
+      message: {{ text_var }} ({{ state_attr(trigger.entity_id, 'friendly_name') }}) alle {{ states('sensor.time') }} di {{ states('sensor.time_formatted') }}.
 mode: single
