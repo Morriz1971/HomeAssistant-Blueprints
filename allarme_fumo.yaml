@@ -16,7 +16,7 @@ blueprint:
     text:
         name: Messaggio
         description: Testo del messaggio. Questo messaggio viene aggiunto al nome del sensore [sensor name] [text message].
-        default: ATTENZIONE! È stato rilevato del **fumo nella tavernetta**.
+        default: ATTENZIONE! È stato rilevato del **fumo nella tavernetta** alle {{ states('sensor.time') }} di {{ states('sensor.time_formatted') }}.
         selector:
             text:
 
@@ -32,9 +32,10 @@ action:
     data:
       title: !input title
       parse_mode: markdown
-      message: "{{state_attr(trigger.entity_id, 'friendly_name')}} {{text_var}}"
+      message: "{{ state_attr(trigger.entity_id, 'friendly_name') }} {{ text_var }}"
   - service: notify.persistent_notification
     data:
         title: !input title
-        message: "{{state_attr(trigger.entity_id, 'friendly_name')}} {{text_var}}"
+        parse_mode: markdown
+        message: "{{ state_attr(trigger.entity_id, 'friendly_name') }} {{ text_var }}"
 mode: single
