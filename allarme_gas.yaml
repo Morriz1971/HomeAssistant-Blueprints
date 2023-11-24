@@ -1,0 +1,40 @@
+blueprint:
+  name: Allarme per gas
+  description: Vengono inviate una notifica push su Telegram e una notifica persistente ad Home Assistant non appena uno dei sensori individua del gas.
+  domain: automation
+  homeassistant:
+    min_version: 2023.10.0
+  source_url: https://github.com/Morriz1971/HomeAssistant-Blueprints/blob/main/allarme_gas.yaml
+  input:
+    title:
+      name: Titolo
+      description: Titolo della notifica da inviare, per es. Allarme gas
+      default: 🏠 *HA PIEVE* - Allarme gas
+      selector:
+        text:
+    text:
+      name: Messaggio
+      description: Testo del messaggio da inviare, per es. ATTENZIONE! È stato rilevato del gas
+      default: 🔥 ATTENZIONE! È stato rilevato del *gas*
+      selector:
+        text:
+trigger:
+  platform: template
+  value_template: "{{ states.binary_sensor | selectattr('attributes.device_class', 'eq', 'gas') | map(attribute='state') | list | join(',') == 'on' }}"
+variables:
+    text_var: !input text
+action:
+  - service: telegram_bot.send_message
+    data:
+      title: !input title
+      parse_mode: markdown
+      message: |-
+      
+        {{ text_var }} ({{ state_attr(trigger.entity_id, 'friendly_name') }}) alle {{ states('sensor.time') }} di {{ states('sensor.time_formatted') }}.
+  - service: notify.persistent_notification
+    data:
+      title: 🏠 Allarme gas
+      message: |-
+      
+        🔥 ATTENZIONE! È stato rilevato del **gas** ({{ state_attr(trigger.entity_id, 'friendly_name') }}) alle {{ states('sensor.time') }} di {{ states('sensor.time_formatted') }}.
+mode: single
