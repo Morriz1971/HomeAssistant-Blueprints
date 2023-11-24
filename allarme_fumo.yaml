@@ -15,7 +15,7 @@ blueprint:
     text:
       name: Messaggio
       description: Testo del messaggio da inviare, per es. ATTENZIONE! È stato rilevato del fumo
-      default: ATTENZIONE! È stato rilevato del *fumo*
+      default: 💨 ATTENZIONE! È stato rilevato del *fumo*
       selector:
         text:
 trigger:
@@ -36,5 +36,5 @@ action:
       title: 🏠 Allarme fumo
       message: |-
       
-        ATTENZIONE! È stato rilevato del **fumo** ({{ state_attr(trigger.entity_id, 'friendly_name') }}) alle {{ states('sensor.time') }} di {{ states('sensor.time_formatted') }}.
+        💨 ATTENZIONE! È stato rilevato del **fumo** ({{ state_attr(trigger.entity_id, 'friendly_name') }}) alle {{ states('sensor.time') }} di {{ states('sensor.time_formatted') }}.
 mode: single
