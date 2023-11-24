@@ -9,13 +9,13 @@ blueprint:
     title:
       name: Titolo
       description: Titolo della notifica da inviare, per es. Allarme fumo
-      default: 'HA PIEVE - Allarme fumo'
+      default: 🏠 *HA PIEVE* - Allarme fumo
       selector:
         text:
     text:
       name: Messaggio
       description: Testo del messaggio da inviare, per es. ATTENZIONE! È stato rilevato del fumo
-      default: ATTENZIONE! È stato rilevato del **fumo**
+      default: ATTENZIONE! È stato rilevato del *fumo*
       selector:
         text:
 trigger:
@@ -28,14 +28,13 @@ action:
     data:
       title: !input title
       parse_mode: markdown
-      message: >-
+      message: |-
       
         {{ text_var }} ({{ state_attr(trigger.entity_id, 'friendly_name') }} ) alle {{ states('sensor.time') }} di {{ states('sensor.time_formatted') }}.
   - service: notify.persistent_notification
     data:
-      title: !input title
-      parse_mode: markdown
-      message: >-
+      title: 🏠 Allarme fumo
+      message: |-
       
-        {{ text_var }} ({{ state_attr(trigger.entity_id, 'friendly_name') }}) alle {{ states('sensor.time') }} di {{ states('sensor.time_formatted') }}.
+        ATTENZIONE! È stato rilevato del **fumo** ({{ state_attr(trigger.entity_id, 'friendly_name') }}) alle {{ states('sensor.time') }} di {{ states('sensor.time_formatted') }}.
 mode: single
