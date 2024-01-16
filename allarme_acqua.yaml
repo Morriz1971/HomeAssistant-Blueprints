@@ -1,0 +1,40 @@
+blueprint:
+  name: Allarme per allagamento
+  description: Vengono inviate una notifica push su Telegram e una notifica persistente ad Home Assistant non appena uno dei sensori individua un allagamento sul pavimento.
+  domain: automation
+  homeassistant:
+    min_version: 2023.12.0
+  source_url: https://github.com/Morriz1971/HomeAssistant-Blueprints/blob/main/allarme_acqua.yaml
+  input:
+    title:
+      name: Titolo
+      description: Titolo della notifica da inviare, per es. Allarme allagamento
+      default: 🏠 *HA PIEVE* - Allarme allagamento
+      selector:
+        text:
+    text:
+      name: Messaggio
+      description: Testo del messaggio da inviare, per es. ATTENZIONE! È stato rilevato un allagamento sul pavimento
+      default: 🩸 ATTENZIONE! È stato rilevato un `allagamento sul pavimento`
+      selector:
+        text:
+trigger:
+  platform: template
+  value_template: "{{ states.binary_sensor | selectattr('attributes.device_class', 'eq', 'water') | map(attribute='state') | list | join(',') == 'on' }}"
+variables:
+    text_var: !input text
+action:
+  - service: telegram_bot.send_message
+    data:
+      title: !input title
+      parse_mode: markdown
+      message: |-
+      
+        {{- '\n' -}}﹋﹋﹋﹋﹋﹋﹋﹋﹋﹋﹋﹋﹋{{- '\n\n' -}}{{ text_var }} ({{ state_attr(trigger.entity_id, 'friendly_name') }}) alle {{ states('sensor.time') }} di {{ states('sensor.time_formatted') }}.
+  - service: notify.persistent_notification
+    data:
+      title: 🏠 Allarme allagamento
+      message: |-
+      
+        🩸 ATTENZIONE! È stato rilevato un `allagamento sul pavimento` ({{ state_attr(trigger.entity_id, 'friendly_name') }}) alle {{ states('sensor.time') }} di {{ states('sensor.time_formatted') }}.
+mode: single
