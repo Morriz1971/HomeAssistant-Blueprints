@@ -3,11 +3,11 @@ blueprint:
   name: IKEA BILRESA Dual Button
   author: Marcello Masili
   description: |
-    IKEA BILRESA dual-button remote automation with single press, double press, long press, and configurable while-holding actions.
+    Automazione che gestisce la singola pressa, doppia pressa, lunga pressione e azioni configurabili durante la pressione del doppio pulsante IKEA BILRESA.
 
     Version 1.0.0
 
-    [Documentation, upgrade notes, and changelog](https://github.com/Morriz1971/HomeAssistant-Blueprints/blob/main/README.md)
+    [Documentazione, note di aggiornamento e changelog](https://github.com/Morriz1971/HomeAssistant-Blueprints/blob/main/README.md)
   domain: automation
   source_url: https://github.com/Morriz1971/HomeAssistant-Blueprints/blob/main/Ikea_Bilresa_DualButton.yaml
   homeassistant:
@@ -18,7 +18,7 @@ blueprint:
       name: Selezione del pulsante
       icon: fas:mobile-button
       description: >
-        Select the event entities for all 2 buttons on the IKEA BILRESA dual-button remote.
+        Seleziona le entità dell'evento per tutti i 2 pulsanti sul pulsante IKEA BILRESA.
       collapsed: true
       input:
         button1_event:
@@ -32,7 +32,7 @@ blueprint:
                 device_class: event
                 device:
                   manufacturer: IKEA
-                  model: BILRESA remote control with buttons (Matter) (E2489)
+                  model: BILRESA remote control with buttons (Matter)
 
         button2_event:
           name: Entity
