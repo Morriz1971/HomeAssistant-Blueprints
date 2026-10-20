@@ -18,18 +18,17 @@ blueprint:
       name: Selezione del pulsante
       icon: fas:mobile-button
       description: >
-        Seleziona le entità dell'evento per tutti i 2 pulsanti sul pulsante IKEA BILRESA.
+        Seleziona le entità dell'evento di pressione per tutti e due i pulsanti dell'IKEA BILRESA.
       collapsed: true
       input:
         button1_event:
           name: Entity
           description: >
-            Select the event entity for Button 1
+            Seleziona l'entità dell'evento di pressione per il punsante ON (superiore)
           selector: &button_event_selector
             entity:
               multiple: true
               filter:
-                device_class: event
                 device:
                   manufacturer: IKEA
                   model: BILRESA remote control with buttons (Matter)
@@ -37,7 +36,7 @@ blueprint:
         button2_event:
           name: Entity
           description: >
-            Select the event entity for Button 2
+            Seleziona l'entità dell'evento di pressione per il punsante OFF (inferiore)
           selector: *button_event_selector
 
     button1:
