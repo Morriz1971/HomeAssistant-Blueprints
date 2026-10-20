@@ -29,11 +29,10 @@ blueprint:
             entity:
               multiple: true
               filter:
-                domain: event
                 device_class: event
                 device:
-                  manufacturer: IKEA of Sweden
-                  model: BILRESA dual button
+                  manufacturer: IKEA
+                  model: BILRESA remote control with buttons (Matter) (E2489)
 
         button2_event:
           name: Entity
