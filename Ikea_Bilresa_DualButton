@@ -43,7 +43,7 @@ blueprint:
       name: Azione per la pressione del pulsante ON
       icon: mdi:numeric-1-circle
       description: >
-        Define actions when pressing Button 1.
+       Definisca l'azione da intraprendere a seguito della pressione del pulsante ON.
       collapsed: true
       input:
         button1_single:
@@ -106,7 +106,7 @@ blueprint:
       name: Azione per la pressione del pulsante OFF
       icon: mdi:numeric-2-circle
       description: >
-        Define actions when pressing Button 2.
+        Definisca l'azione da intraprendere a seguito della pressione del pulsante OFF.
       collapsed: true
       input:
         button2_single:
