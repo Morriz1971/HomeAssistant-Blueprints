@@ -9,9 +9,9 @@ blueprint:
 
     [Documentation, upgrade notes, and changelog](https://github.com/Morriz1971/HomeAssistant-Blueprints/new/main/README.md)
   domain: automation
-  source_url: https://raw.githubusercontent.com/Skaronator/home-assistant-blueprints/refs/heads/main/automation/ikea-bilresa-dual-button.yaml
+  source_url: https://github.com/Morriz1971/HomeAssistant-Blueprints/blob/main/Ikea_Bilresa_DualButton.yaml
   homeassistant:
-    min_version: 2026.8.0
+    min_version: 2026.10.0
 
   input:
     setup:
@@ -30,7 +30,7 @@ blueprint:
               multiple: true
               filter:
                 domain: event
-                device_class: button
+                device_class: event
                 device:
                   manufacturer: IKEA of Sweden
                   model: BILRESA dual button
