@@ -7,7 +7,7 @@ blueprint:
 
     Version 1.0.0
 
-    [Documentation, upgrade notes, and changelog](https://github.com/Morriz1971/HomeAssistant-Blueprints/new/main/README.md)
+    [Documentation, upgrade notes, and changelog](https://github.com/Morriz1971/HomeAssistant-Blueprints/blob/main/README.md)
   domain: automation
   source_url: https://github.com/Morriz1971/HomeAssistant-Blueprints/blob/main/Ikea_Bilresa_DualButton.yaml
   homeassistant:
@@ -15,8 +15,8 @@ blueprint:
 
   input:
     setup:
-      name: Button Setup
-      icon: mdi:cog
+      name: Selezione del pulsante
+      icon: fas:mobile-button
       description: >
         Select the event entities for all 2 buttons on the IKEA BILRESA dual-button remote.
       collapsed: true
