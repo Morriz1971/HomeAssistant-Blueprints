@@ -1,6 +1,6 @@
 mode: restart
 blueprint:
-  name: IKEA BILRESA Dual Button
+  name: 👆🏼 Pulsante IKEA BILRESA
   author: Marcello Masili
   description: |
     Automazione che gestisce la singola pressa, doppia pressa, lunga pressione e azioni configurabili durante la pressione del doppio pulsante IKEA BILRESA.
